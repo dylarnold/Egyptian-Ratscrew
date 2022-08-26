@@ -11,6 +11,7 @@
     {"id":{"name":"oDeck","path":"objects/oDeck/oDeck.yy",},"order":0,},
     {"id":{"name":"fnt_Gabriola","path":"fonts/fnt_Gabriola/fnt_Gabriola.yy",},"order":0,},
     {"id":{"name":"sMenuPlayers","path":"sprites/sMenuPlayers/sMenuPlayers.yy",},"order":5,},
+    {"id":{"name":"Sprite9","path":"sprites/Sprite9/Sprite9.yy",},"order":15,},
     {"id":{"name":"sCard","path":"sprites/sCard/sCard.yy",},"order":0,},
     {"id":{"name":"oButton","path":"objects/oButton/oButton.yy",},"order":2,},
     {"id":{"name":"oSettings","path":"objects/oSettings/oSettings.yy",},"order":4,},
@@ -64,7 +65,7 @@
   ],
   "IncludedFiles": [],
   "MetaData": {
-    "IDEVersion": "2022.6.1.26",
+    "IDEVersion": "2022.3.0.625",
   },
   "resourceVersion": "1.5",
   "name": "Egyptian Ratscrew",
