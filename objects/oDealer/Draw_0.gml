@@ -12,7 +12,7 @@ for (var i = 0; i < pCount; i++)
 		draw_sprite(sCardBack, 0, xx, yy);
 		draw_set_font(fnt_Gabriola);
 		draw_set_color(c_navy);
-		draw_text_ext(xx - 50, yy, string(dSize), 3, 300);
+		draw_text_ext(xx - 30, yy - 30, string(dSize), 3, 300);
 		
 	}
 }

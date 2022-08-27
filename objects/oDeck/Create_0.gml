@@ -7,10 +7,6 @@ pCount = global.playerCount;
 deckSize = global.deckSize;
 
 
-// TESTING ONLY
-show_message(string(global.playerCount));
-
-
 
 // Discard pile (starts empty)
 pile = ds_queue_create();

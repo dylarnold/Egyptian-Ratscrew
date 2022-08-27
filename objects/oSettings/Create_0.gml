@@ -1,5 +1,6 @@
 // Player controls
 pCount = global.playerCount
+pauseKey = vk_escape;
 playerControls = [ 
 	[ord("Z"), ord("S")],	    // p1
 	[ord("M"), ord("K")],	   // p2

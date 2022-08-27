@@ -10,7 +10,8 @@ function easeOutQuint(x){
 
 /*
 TO DO:
-
+	
+	** BUG ** Slurping up the pile doesn't take all the cards for some reason......
 	player turns
 	player playing card
 	slappable-combination detection

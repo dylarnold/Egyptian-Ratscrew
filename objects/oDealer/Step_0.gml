@@ -19,10 +19,9 @@ if dealTimer <= 0 and cardsToDeal > 0
 			// instantiate card
 			var myCard = instance_create_layer(oDeck.x, oDeck.y, "Instances", oDealtCard);
 	
-			//myCard.startX = (player who played the card's deck.x)
-			//myCard.startY = (player who played the card's deck.y)
-			myCard.finalX = deckPositions[targetDeck][0]; // OR the discard pile
-			myCard.finalY = deckPositions[targetDeck][1]; // OR the discard pile
+			// animate from deck position (default) to player decks
+			myCard.finalX = deckPositions[targetDeck][0]; 
+			myCard.finalY = deckPositions[targetDeck][1]; 
 	
 			myCard.c = myCard.dealSpeed(2);
 	
@@ -31,35 +30,66 @@ if dealTimer <= 0 and cardsToDeal > 0
 			{
 				targetDeck = targetDeck mod pCount;
 			}
+			if cardsToDeal <= 0
+			{
+				state = noone;
+			}
+			
 		break;
+		
+		case "playing card":
+			// code
+			var myCard = instance_create_layer(deckPositions[targetDeck][0], deckPositions[targetDeck][1], "Instances", oDealtCard);
+			
+			myCard.finalX = oDeck.x;
+			myCard.finalY = oDeck.y;
+			
+			myCard.easingFunc = easeOutQuint;
+			myCard.c = myCard.dealSpeed(.25);
+			state = noone;
+			
+		break
 		
 		case "scooping":
 			// code
+			var myCard = instance_create_layer(oDeck.x, oDeck.y, "Instances", oDealtCard);
+			
+			// reset timer
+			dealTimer = dealTimerMax / (cardsToDeal / 3);
+	
+			//decrement remaining cards
+			cardsToDeal -= 1;
+			
+			// animate from deck/pile position to particular deck
+			myCard.finalX = deckPositions[targetDeck][0];
+			myCard.finalY = deckPositions[targetDeck][1];
+			
+			myCard.c = myCard.dealSpeed(1);
+			
+			if cardsToDeal <= 0
+			{
+				state = noone;
+			}
 			
 		break;
 
 		case "burning":
 			// code
+			var myCard = instance_create_layer(deckPositions[targetDeck][0], deckPositions[targetDeck][1], "Instances", oDealtCard);
+			
+			myCard.finalX = oDeck.x;
+			myCard.finalY = oDeck.y;
+			
+			myCard.easingFunc = easeOutQuint;
+			myCard.c = myCard.dealSpeed(.5);
+			
+			state = noone;
 		break;
 	}
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 // timer ticks down
 dealTimer -= 1;
- 
- // reset target to deal to
-if !dealing {targetDeck = 0;}
  

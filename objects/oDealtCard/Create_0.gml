@@ -22,6 +22,10 @@ function easeOutElastic(x)
 	return power(2, (-10 * x)) * sin((x * 10 - 0.75) * c4) + 1;
 }
 
+easingFunc = easeOutElastic;
+
+
+
 function dealSpeed(seconds)
 {
 	// Finds percentage to increment a value per frame to complete in "seconds" seconds. 

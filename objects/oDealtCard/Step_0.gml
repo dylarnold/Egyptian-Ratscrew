@@ -1,7 +1,7 @@
 /// @description 
 
 percent += c
-elastic = easeOutElastic(percent)
+elastic = easingFunc(percent)
 
 x = lerp(startX, finalX, elastic);
 y = lerp(startY, finalY, elastic);
