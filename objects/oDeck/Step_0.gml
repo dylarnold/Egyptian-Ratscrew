@@ -1,8 +1,5 @@
-/// @description 
-
 
 // Get input from players while oDealer state is noone
-
 if oDealer.state == noone
 {
 	for (var i = 0; i < pCount; i++)
@@ -10,18 +7,19 @@ if oDealer.state == noone
 		// if player pressed slap button
 		if keyboard_check_pressed(oSettings.playerControls[i][1])
 		{
+			var pileSize = ds_queue_size(pile);
 			with oDealer
 			{
 				state = "scooping";
 				targetDeck = i;
 				finalX = deckPositions[i][0];
 				finalY = deckPositions[i][1];
-				cardsToDeal = ds_queue_size(oDeck.pile);
+				cardsToDeal = pileSize;
 			}
 			with oDeck
 			{	
 				// move all cards from pile to slapping player's deck
-				for (var j = 0; j < ds_queue_size(pile); j++)
+				for (var j = 0; j < pileSize; j++)
 				{
 					var card = ds_queue_dequeue(pile);
 					ds_queue_enqueue(deck[i], card);

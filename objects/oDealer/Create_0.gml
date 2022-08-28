@@ -27,5 +27,5 @@ state = "dealing";
 // dealing	// beginning of round when deck is divided amongs players
 // scooping // after a slap when a player collects the pile 
 // burning 	// after an illegal slap when a player must pay cards to the pile
-// playing 	// waiting state where the players can act
-
+// playing card 	// triggered when player has just played a card (animation).
+// noone			// default state
