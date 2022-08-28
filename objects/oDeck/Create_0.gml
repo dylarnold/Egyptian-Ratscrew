@@ -1,3 +1,5 @@
+/// @description Object handles bookkeeping.
+// State based player input handling. Keeps track of cards' locations.
 /* decks and the pile are both queues.
 FIFO
 first in line is top of the player's deck (first to be played)
@@ -48,3 +50,4 @@ for (var i = 0; i < deckSize; i++)
 	ds_queue_enqueue(deck[j], array_pop(startDeck));
 }
 
+slappable = false;

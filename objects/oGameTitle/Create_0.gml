@@ -1,4 +1,4 @@
-/// @description 
+/// @description Object draws card animations.
 image_alpha = 0;
 aa = 0;
 timer = room_speed*1.5;

@@ -19,7 +19,7 @@ for (var i = 0; i < pCount; i++)
 // Timer for dealing animation
 dealTimerMax = 0.25 * room_speed;
 dealTimer = dealTimerMax;
-cardsToDeal = 52;
+cardsToDeal = global.deckSize;
 
 // Game states and associated variables
 targetDeck = 0;
