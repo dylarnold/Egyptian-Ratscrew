@@ -16,7 +16,12 @@ if dealTimer <= 0 and cardsToDeal > 0
 			// animate from deck position (default) to player decks
 			myCard.finalX = deckPositions[targetDeck][0]; 
 			myCard.finalY = deckPositions[targetDeck][1]; 
-			myCard.c = myCard.dealSpeed(2);
+			myCard.c = myCard.dealSpeed(1);
+			myCard.sprite_index = sCardBack;
+			myCard.targetScale = 1;
+			myCard.easingFunc = easeOutElastic;
+			myCard.scale = 2.3; // magic number
+			
 			
 			// Cycle through all decks
 			targetDeck += 1;
@@ -34,9 +39,14 @@ if dealTimer <= 0 and cardsToDeal > 0
 			
 			myCard.easingFunc = easeOutQuint;
 			myCard.c = myCard.dealSpeed(.25);
+			myCard.sprite_index = sCard;
+			myCard.targetScale = 2.3 // magic number
+			
+			
+			myCard.image_index = image;
 			state = noone;
 			
-		break
+		break;
 		
 		case "scooping":
 			// reset timer
@@ -50,7 +60,10 @@ if dealTimer <= 0 and cardsToDeal > 0
 			// animate from deck/pile position to particular deck
 			myCard.finalX = deckPositions[targetDeck][0];
 			myCard.finalY = deckPositions[targetDeck][1];
-			myCard.c = myCard.dealSpeed(1);
+			myCard.c = myCard.dealSpeed(1.5);
+			myCard.sprite_index = sCardBack;
+			myCard.targetScale = 1;
+			myCard.scale = 2.3; // magic number
 			
 			if cardsToDeal <= 0 {state = noone;}
 			
@@ -64,8 +77,10 @@ if dealTimer <= 0 and cardsToDeal > 0
 			myCard.finalY = oDeck.y;
 			
 			myCard.easingFunc = easeOutQuint;
-			myCard.c = myCard.dealSpeed(.5);
-			
+			myCard.c = myCard.dealSpeed(1);
+			myCard.sprite_index = sCard;
+			myCard.image_index = image;			
+			myCard.targetScale = 2.3; // magic number
 			state = noone;
 		break;
 	}

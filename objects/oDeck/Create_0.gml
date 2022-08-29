@@ -7,7 +7,7 @@ first in line is bottom of discard pile (first to be added to the bottom of a de
 
 pCount = global.playerCount;
 deckSize = global.deckSize;
-
+pileTail = noone;
 
 
 // Discard pile (starts empty)

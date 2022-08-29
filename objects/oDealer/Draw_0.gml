@@ -12,7 +12,14 @@ for (var i = 0; i < pCount; i++)
 		draw_sprite(sCardBack, 0, xx, yy);
 		draw_set_font(fnt_Gabriola);
 		draw_set_color(c_navy);
-		draw_text_ext(xx - 30, yy - 30, string(dSize), 3, 300);
+		draw_text(xx - 60 , yy - 80, "Cards in Deck: " + string(dSize))
 		
 	}
+}
+
+if state == "scooping"
+{
+	draw_set_halign(fa_center);
+	draw_text(room_width*.5, 50, "SLAPPED! \n by player: " + string(targetDeck + 1));
+	draw_set_halign(fa_left);
 }

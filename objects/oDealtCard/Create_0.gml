@@ -1,16 +1,12 @@
 /// @description Instances of this object are initialized by oDealer for animation purposes.
-sprite_index = global.cardBack;
-
+scale = 1;
 // used to lerp position
-startX = x
-startY = y
+startX = x;
+startY = y;
 
+// instance is fed finalX and finalY values upon initialization by oDealer.
 
-// instance will be fed new values upon creation
-finalX = 0
-finalY = 0
-
-easingFunc = easeOutElastic;
+easingFunc = easeOutQuint;
 
 function dealSpeed(seconds)
 {

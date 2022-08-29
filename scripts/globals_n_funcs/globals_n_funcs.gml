@@ -32,7 +32,10 @@ function detectSlappable(queue)
 	// 0 thru 12 is A,2,3,4,5,6,7,8,9,10,J,Q,K
 	for (var i = 0; i < qSize; i++)
 	{
-		var cardVal = ds_queue_dequeue(qCopy) mod 13;
+		if ds_queue_size(qCopy) > 0
+		{
+			var cardVal = ds_queue_dequeue(qCopy) mod 13;
+		}
 		array[i] = cardVal;
 	}
 	
@@ -78,6 +81,8 @@ function detectSlappable(queue)
 			}
 		}
 	}
+	// avoid memory leak
+	ds_queue_destroy(qCopy);
 	return false
 }
 

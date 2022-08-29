@@ -1,5 +1,7 @@
 // Determine if pile is slappable.
 slappable = detectSlappable(pile);
+pileSize = ds_queue_size(pile);
+pileTail = ds_queue_tail(pile);
 
 
 
@@ -14,7 +16,6 @@ if oDealer.state == noone
 		{
 			if slappable
 			{
-				var pileSize = ds_queue_size(pile);
 				with oDealer
 				{
 					// animate cards
@@ -22,7 +23,7 @@ if oDealer.state == noone
 					targetDeck = i;
 					finalX = deckPositions[i][0];
 					finalY = deckPositions[i][1];
-					cardsToDeal = pileSize;
+					cardsToDeal = other.pileSize;
 				}
 				
 				// move all cards from pile to slapping player's deck
@@ -47,7 +48,8 @@ if oDealer.state == noone
 						targetDeck = i;
 						startX = deckPositions[i][0];
 						startY = deckPositions[i][1];
-						cardsToDeal = global.burnAmmount
+						cardsToDeal = global.burnAmmount;
+						image = ds_queue_head(other.deck[i]);
 					}
 					// move burnt cards to bottom of pile (head of queue)
 					// GML queue datastructures don't support appending to left. need to copy, empty, append, append copied values.
@@ -87,6 +89,7 @@ if oDealer.state == noone
 					startX = oDealer.deckPositions[i][0];
 					startY = oDealer.deckPositions[i][1];
 					cardsToDeal = 1;
+					image = ds_queue_head(other.deck[i]);
 				}
 				with oDeck
 				{
