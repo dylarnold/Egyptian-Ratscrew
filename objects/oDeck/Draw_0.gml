@@ -2,9 +2,9 @@
 
 
 
-if pileSize > 0 
+if pileSize > 0
 {
-	draw_sprite_ext(sCard, pileTail, x, y, 2.3, 2.3, 1, c_white, 1);
+	draw_sprite_ext(sCard, pileTail, x, y, 2.3, 2.3, 0, c_white, 1);
 }
 
 // show how many cards are in pile
