@@ -1,9 +1,3 @@
-// Determine if pile is slappable.
-slappable = detectSlappable(pile);
-pileSize = ds_queue_size(pile);
-pileTail = ds_queue_tail(pile);
-
-
 
 // Get input from players while oDealer state is noone
 if oDealer.state == noone
@@ -14,8 +8,10 @@ if oDealer.state == noone
 		// if player pressed slap button
 		if keyboard_check_pressed(oSettings.playerControls[i][1])
 		{
-			if slappable
+			// if pile is slappable
+			if detectSlappable(pile)
 			{
+				
 				with oDealer
 				{
 					// animate cards
@@ -32,6 +28,7 @@ if oDealer.state == noone
 					var card = ds_queue_dequeue(pile);
 					ds_queue_enqueue(deck[i], card);
 				}
+				pileSize = 0;
 				
 				// play audio
 				audio_play_sound(sndSlapVoice1, 0, false);
@@ -41,6 +38,7 @@ if oDealer.state == noone
 				if playerDeckSize > 0
 				{
 					// burn a card
+					pileSize += 1;
 					with oDealer
 					{
 						// animate
@@ -50,9 +48,11 @@ if oDealer.state == noone
 						startY = deckPositions[i][1];
 						cardsToDeal = global.burnAmmount;
 						image = ds_queue_head(other.deck[i]);
+
 					}
 					// move burnt cards to bottom of pile (head of queue)
-					// GML queue datastructures don't support appending to left. need to copy, empty, append, append copied values.
+					// GML queue datastructures don't support appending to left. 
+					// need to copy, empty, append, append copied values.
 					// copy
 					var qTemp = ds_queue_create();
 					ds_queue_copy(qTemp, pile);
@@ -82,6 +82,7 @@ if oDealer.state == noone
 		{
 			if playerDeckSize > 0 
 			{
+				pileSize += 1;
 				with oDealer
 				{
 					state = "playing card";

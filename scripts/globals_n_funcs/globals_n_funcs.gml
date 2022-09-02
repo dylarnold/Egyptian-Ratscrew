@@ -10,13 +10,14 @@ function easeOutElastic(x)
 {
 	var c4 = (2 * pi) / 3;
 
-	if x == 0 return 0
-	if x == 1 return 1
+	if x == 0 return 0;
+	if x == 1 return 1;
 
 	return power(2, (-10 * x)) * sin((x * 10 - 0.75) * c4) + 1;
 }
 
-function easeOutQuint(x){
+function easeOutQuint(x)
+{
 	return 1 - power(1 - x, 5);
 }
 
@@ -83,7 +84,7 @@ function detectSlappable(queue)
 	}
 	// avoid memory leak
 	ds_queue_destroy(qCopy);
-	return false
+	return false;
 }
 
 /*
@@ -94,7 +95,10 @@ TO DO:
 	get artwork for cards and have oDeck draw them
 	J, Q, K, A rules
 		make a state where next player owes x cards. it remains their turn until x cards have been played (overruled by slap)
-		
+	uh oh... crashes sometimes, when I mash keys.... yikes
+	
+	oDeck.image variable is whack... figure out if i need it.
+	
 	visual feedback
 	audio feedback
 	options menu
@@ -106,9 +110,23 @@ TO DO:
 	
 	
 Design:
-	player turns (do i enforce player turns, or simply penalize an out-of-turn play with burning a card?)
+	do i enforce player turns, or simply penalize an out-of-turn play with burning a card?
+		probably player turns. Can make a stupid sound if a player tries to play out of turn.
 	
 	Dedicated slap-in button for non-players: it will add a new player to the game and assign them buttons
+		Yes, but might be unfair if the other buttons end up being universal.
+		
 	
 	Each player has their own "play card" button, and their own "slap" button
+		Probably?
+	OR
+	
+	Universal Play-Card button? 
+		If player turns are enforced, it could work. 
+		Sounds kind-of more fun?
+		What if a player accidentally plays a card for someone else?
+		
+	
+		
+		
 */

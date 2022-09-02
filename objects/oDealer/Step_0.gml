@@ -38,12 +38,13 @@ if dealTimer <= 0 and cardsToDeal > 0
 			myCard.finalY = oDeck.y;
 			
 			myCard.easingFunc = easeOutQuint;
-			myCard.c = myCard.dealSpeed(.25);
+			myCard.c = myCard.dealSpeed(.35);
 			myCard.sprite_index = sCard;
+			myCard.image_index = image;
 			myCard.targetScale = 2.3 // magic number
 			
 			
-			myCard.image_index = image;
+			
 			state = noone;
 			
 		break;
@@ -56,6 +57,10 @@ if dealTimer <= 0 and cardsToDeal > 0
 			cardsToDeal -= 1;
 			
 			var myCard = instance_create_layer(oDeck.x, oDeck.y, "Instances", oDealtCard);
+			
+			//change top deck card as cards are removed TODO
+			// code
+			
 			
 			// animate from deck/pile position to particular deck
 			myCard.finalX = deckPositions[targetDeck][0];
@@ -82,6 +87,7 @@ if dealTimer <= 0 and cardsToDeal > 0
 			myCard.image_index = image;			
 			myCard.targetScale = 2.3; // magic number
 			state = noone;
+			myCard.drawUnder = true;
 		break;
 	}
 }

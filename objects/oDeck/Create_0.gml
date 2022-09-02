@@ -4,11 +4,10 @@
 FIFO
 first in line is top of the player's deck (first to be played)
 first in line is bottom of discard pile (first to be added to the bottom of a deck) */
-
 pCount = global.playerCount;
 deckSize = global.deckSize;
-pileTail = noone;
-
+topCard = noone;
+pileSize = 0;
 
 // Discard pile (starts empty)
 pile = ds_queue_create();
@@ -18,12 +17,12 @@ pile = ds_queue_create();
 startDeck = array_create(deckSize);
 for (var i = 0; i < deckSize; i++)
 {
-	array_push(startDeck, i);
+	startDeck[i] = i;
 }
 
 
 // Shuffle startDeck (Fisher–Yates shuffle Algorithm)
-for (var i = deckSize - 1; i > 0; i--)
+for (var i = deckSize - 1; i >= 0; i--)
 {
 	var j = irandom_range(0, i);
 	// Swap

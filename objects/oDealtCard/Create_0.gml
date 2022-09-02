@@ -1,5 +1,6 @@
 /// @description Instances of this object are initialized by oDealer for animation purposes.
 scale = 1;
+drawUnder = false;
 // used to lerp position
 startX = x;
 startY = y;
