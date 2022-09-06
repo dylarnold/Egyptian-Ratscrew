@@ -27,7 +27,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "UI",
-    "path": "folders/Objects/Visual/UI.yy",
+    "path": "folders/Objects/misc/UI.yy",
   },
   "resourceVersion": "1.0",
   "name": "oButton",

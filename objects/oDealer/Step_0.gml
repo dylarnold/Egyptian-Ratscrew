@@ -38,10 +38,15 @@ if dealTimer <= 0 and cardsToDeal > 0
 			myCard.finalY = oDeck.y;
 			
 			myCard.easingFunc = easeOutQuint;
-			myCard.c = myCard.dealSpeed(.35);
+			myCard.c = myCard.dealSpeed(.25);
 			myCard.sprite_index = sCard;
 			myCard.image_index = image;
 			myCard.targetScale = 2.3 // magic number
+			myCard.isplayed = true; // being played to the deck ( as opposed to dealt or something else)
+			
+			// depth related
+			cardDepth -= 1;
+			myCard.depth = cardDepth;
 			
 			
 			
@@ -61,6 +66,8 @@ if dealTimer <= 0 and cardsToDeal > 0
 			//change top deck card as cards are removed TODO
 			// code
 			
+			// reset oDeck's showing value to false
+			oDeck.showing = false;
 			
 			// animate from deck/pile position to particular deck
 			myCard.finalX = deckPositions[targetDeck][0];
@@ -69,6 +76,9 @@ if dealTimer <= 0 and cardsToDeal > 0
 			myCard.sprite_index = sCardBack;
 			myCard.targetScale = 1;
 			myCard.scale = 2.3; // magic number
+			
+			// depth related
+			cardDepth = depth - 53;
 			
 			if cardsToDeal <= 0 {state = noone;}
 			

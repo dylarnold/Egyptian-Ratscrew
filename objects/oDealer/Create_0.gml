@@ -4,7 +4,7 @@ dealSprite = global.cardBack;
 sWidth = sprite_get_width(dealSprite);
 
 deckPositions = []
-
+cardDepth = depth - 53;
 //default deck positions
 
 var hh = (room_width / (pCount + 1)) // horizontal spacing between player decks

@@ -8,6 +8,7 @@ pCount = global.playerCount;
 deckSize = global.deckSize;
 topCard = noone;
 pileSize = 0;
+showing = false;
 
 // Discard pile (starts empty)
 pile = ds_queue_create();
@@ -48,5 +49,3 @@ for (var i = 0; i < deckSize; i++)
 	var j = i mod pCount;
 	ds_queue_enqueue(deck[j], array_pop(startDeck));
 }
-
-slappable = false;

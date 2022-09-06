@@ -11,7 +11,7 @@ if oDealer.state == noone
 			// if pile is slappable
 			if detectSlappable(pile)
 			{
-				
+				showing = false;
 				with oDealer
 				{
 					// animate cards
@@ -31,7 +31,8 @@ if oDealer.state == noone
 				pileSize = 0;
 				
 				// play audio
-				audio_play_sound(sndSlapVoice1, 0, false);
+				var snd = audio_play_sound(sndSlapVoice1, 0, false);
+				audio_sound_pitch(snd, 0.85);
 			}
 			else // not slappable
 			{
@@ -73,7 +74,8 @@ if oDealer.state == noone
 					}
 					
 					// play audio
-					audio_play_sound(sndBurnVoice1, 0, false);
+					var snd = audio_play_sound(sndBurnVoice1, 0, false);
+					audio_sound_pitch(snd, 0.85);
 				}
 			}
 		}
@@ -92,13 +94,12 @@ if oDealer.state == noone
 					cardsToDeal = 1;
 					image = ds_queue_head(other.deck[i]);
 				}
-				with oDeck
-				{
-					// put card into pile
-					var card = ds_queue_dequeue(deck[i]);
-					ds_queue_enqueue(pile, card);
+
+				// put card into pile
+				var card = ds_queue_dequeue(deck[i]);
+				ds_queue_enqueue(pile, card);
 				
-				}
+				
 			}
 		}
 	}

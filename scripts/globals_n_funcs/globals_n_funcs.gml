@@ -92,21 +92,44 @@ TO DO:
 	
 
 	learn text/fonts for Gamemaker
-	get artwork for cards and have oDeck draw them
+	
 	J, Q, K, A rules
 		make a state where next player owes x cards. it remains their turn until x cards have been played (overruled by slap)
-	uh oh... crashes sometimes, when I mash keys.... yikes
-	
-	oDeck.image variable is whack... figure out if i need it.
+			handled by oDeck since that's already what is detecting player input.... add more conditions to if statements
 	
 	visual feedback
+		show why a slap was correct! 
+		show slap animation always
+		show fail slap animation
+		show burning card animation
+		
+		
 	audio feedback
+		custom slap sounds for each player
+		successful slap sound
+		illegal slap sound
+		
+	
 	options menu
+		ability to raise and lower volume
+		ability to fullscreen/windowed mode
+		ability to customize controls for player 1, 2, etc.
+		
+		player profiles?? handled at start of game like smash bros?
+	
 	win state
+		play again button
+	
+	
 	dedicated slap-in button (have it set up new controls and communicate them to new player)
+	
 	gamepad support?
 	mouse support?
+	
 	music?
+		gotta have a few boppin' tunes to play on loop
+			SNES inspired. maybe "egyptian" sounding musical mode/scale... but not too cliche.
+	
 	
 	
 Design:

@@ -27,8 +27,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "misc",
+    "path": "folders/Objects/misc.yy",
   },
   "resourceVersion": "1.0",
   "name": "oSettings",

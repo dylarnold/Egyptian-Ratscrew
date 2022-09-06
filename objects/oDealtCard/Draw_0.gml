@@ -4,10 +4,7 @@ if drawUnder
 {
 	depth = oDeck.depth + 1;
 }
-else
-{
-	depth = oDeck.depth - 1;
-}
+
 
 scale = lerp(scale, targetScale, .2);
 

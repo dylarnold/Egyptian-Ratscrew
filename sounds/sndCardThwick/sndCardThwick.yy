@@ -11,8 +11,8 @@
     "name": "audiogroup_default",
     "path": "audiogroups/audiogroup_default",
   },
-  "soundFile": "sndCardThwick.ogg",
-  "duration": 0.293288,
+  "soundFile": "sndcardthwick.mp3",
+  "duration": 0.192,
   "parent": {
     "name": "Sounds",
     "path": "folders/Sounds.yy",
