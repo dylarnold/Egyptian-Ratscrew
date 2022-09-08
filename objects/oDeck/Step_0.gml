@@ -8,6 +8,9 @@ if oDealer.state == noone
 		// if player pressed slap button
 		if keyboard_check_pressed(oSettings.playerControls[i][1])
 		{
+			// play sound and effect
+			var myslap = instance_create_layer(x+sprite_width/2*2.3, y+sprite_height/2*2.3, "Instances", oSlapEffect);
+			audio_play_sound(sndSlap1, 1, false);
 			// if pile is slappable
 			if detectSlappable(pile)
 			{

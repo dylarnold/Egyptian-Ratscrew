@@ -7,6 +7,8 @@ if showing
 	draw_sprite_ext(sCard, topCard, x, y, 2.3, 2.3, 0, c_white, 1);
 }
 
+
+
 // show how many cards are in pile
 draw_text(x, y - 80, "Cards in pile: " + string(pileSize));
 
