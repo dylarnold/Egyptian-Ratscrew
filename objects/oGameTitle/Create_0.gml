@@ -3,9 +3,6 @@ image_alpha = 0;
 aa = 0;
 timer = room_speed*1.5;
 
-
-// Function for spawning a button
-
 // Spawn button objects for menu
 xx = room_width / 2
 yy = room_height / 2
