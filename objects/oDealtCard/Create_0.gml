@@ -12,7 +12,7 @@ easingFunc = easeOutQuint;
 
 function dealSpeed(seconds)
 {
-	// Finds percentage to increment a value per frame to complete in "seconds" seconds. 
+	// returns percentage to increment a value per frame to complete in "seconds" seconds. 
 	return (1 / room_speed) / seconds;
 }
 percent = 0;

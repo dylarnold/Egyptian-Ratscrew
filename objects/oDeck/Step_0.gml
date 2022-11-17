@@ -1,16 +1,21 @@
 
 // Get input from players while oDealer state is noone
-if oDealer.state == noone
+if oDealer.state == "wait"
 {
-	for (var i = 0; i < pCount; i++)
+	var ap = activePlayer	// ap used for playing cards (must be active player's turn)
+	var activePlayerDeckSize = ds_queue_size(deck[ap]);
+	
+	for (var i = 0; i < pCount; i++) // i used for slapping (can do at any time)
 	{
-		var playerDeckSize = ds_queue_size(deck[i])
+		var slappingPlayerDeckSize = ds_queue_size(deck[i]);
+		
 		// if player pressed slap button
 		if keyboard_check_pressed(oSettings.playerControls[i][1])
 		{
 			// play sound and effect
-			var myslap = instance_create_layer(x+sprite_width/2*2.3, y+sprite_height/2*2.3, "Instances", oSlapEffect);
+			var myslap = instance_create_layer((x + sprite_width / 2 * 2.3), (y + sprite_height / 2 * 2.3), "Instances", oSlapEffect);
 			audio_play_sound(sndSlap1, 1, false);
+			
 			// if pile is slappable
 			if detectSlappable(pile)
 			{
@@ -32,6 +37,7 @@ if oDealer.state == noone
 					ds_queue_enqueue(deck[i], card);
 				}
 				pileSize = 0;
+				topCard = noone;
 				
 				// play audio
 				var snd = audio_play_sound(sndSlapVoice1, 0, false);
@@ -39,7 +45,7 @@ if oDealer.state == noone
 			}
 			else // not slappable
 			{
-				if playerDeckSize > 0
+				if slappingPlayerDeckSize > 0
 				{
 					// burn a card
 					pileSize += 1;
@@ -57,6 +63,7 @@ if oDealer.state == noone
 					// move burnt cards to bottom of pile (head of queue)
 					// GML queue datastructures don't support appending to left. 
 					// need to copy, empty, append, append copied values.
+					
 					// copy
 					var qTemp = ds_queue_create();
 					ds_queue_copy(qTemp, pile);
@@ -83,27 +90,33 @@ if oDealer.state == noone
 			}
 		}
 		// if player uses "play card" button
-		else if keyboard_check_pressed(oSettings.playerControls[i][0])
+		else if keyboard_check_pressed(oSettings.playerControls[ap][0])
 		{
-			if playerDeckSize > 0 
+			if activePlayerDeckSize > 0 
 			{
 				pileSize += 1;
 				with oDealer
 				{
 					state = "playing card";
-					targetDeck = i;
-					startX = oDealer.deckPositions[i][0];
-					startY = oDealer.deckPositions[i][1];
+					targetDeck = ap;
+					startX = deckPositions[ap][0];
+					startY = deckPositions[ap][1];
 					cardsToDeal = 1;
-					image = ds_queue_head(other.deck[i]);
+					image = ds_queue_head(other.deck[ap]);
 				}
 
 				// put card into pile
-				var card = ds_queue_dequeue(deck[i]);
+				var card = ds_queue_dequeue(deck[ap]);
 				ds_queue_enqueue(pile, card);
 				
-				
+				// advance player turn to next player
+				activePlayer += 1;
+				if activePlayer >= pCount
+				{
+					activePlayer = 0;
+				}
 			}
+
 		}
 	}
 	// pause button pressed

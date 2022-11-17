@@ -25,8 +25,8 @@ cardsToDeal = global.deckSize;
 targetDeck = 0;
 state = "dealing";
 image = noone;
-// dealing	// beginning of round when deck is divided amongs players
-// scooping // after a slap when a player collects the pile 
-// burning 	// after an illegal slap when a player must pay cards to the pile
-// playing card 	// triggered when player has just played a card (animation).
-// noone			// default state
+// dealing		// beginning of round when deck is divided amongs players
+// scooping		// after a slap when a player collects the pile 
+// burning 		// after an illegal slap when a player must pay cards to the pile
+// playing card // triggered when player has just played a card (animation).
+// wait			// default state

@@ -27,7 +27,7 @@ if dealTimer <= 0 and cardsToDeal > 0
 			targetDeck += 1;
 			if targetDeck >= pCount {targetDeck = targetDeck mod pCount;}
 			
-			if cardsToDeal <= 0 {state = noone;}
+			if cardsToDeal <= 0 {state = "wait";}
 			
 		break;
 		
@@ -44,13 +44,11 @@ if dealTimer <= 0 and cardsToDeal > 0
 			myCard.targetScale = 2.3 // magic number
 			myCard.isplayed = true; // being played to the deck ( as opposed to dealt or something else)
 			
-			// depth related
+			// draw depth related
 			cardDepth -= 1;
 			myCard.depth = cardDepth;
 			
-			
-			
-			state = noone;
+			state = "wait";
 			
 		break;
 		
@@ -80,24 +78,25 @@ if dealTimer <= 0 and cardsToDeal > 0
 			// depth related
 			cardDepth = depth - 53;
 			
-			if cardsToDeal <= 0 {state = noone;}
+			if cardsToDeal <= 0 {state = "wait";}
 			
 			
 		break;
 
 		case "burning":
-			var myCard = instance_create_layer(deckPositions[targetDeck][0], deckPositions[targetDeck][1], "Instances", oDealtCard);
+			var _x = deckPositions[targetDeck][0];
+			var _y = deckPositions[targetDeck][1];
+			var myCard = instance_create_layer(_x, _y, "Instances", oDealtCard);
 			
 			myCard.finalX = oDeck.x;
 			myCard.finalY = oDeck.y;
-			
 			myCard.easingFunc = easeOutQuint;
 			myCard.c = myCard.dealSpeed(1);
 			myCard.sprite_index = sCard;
 			myCard.image_index = image;			
 			myCard.targetScale = 2.3; // magic number
-			state = noone;
 			myCard.drawUnder = true;
+			state = "wait";
 		break;
 	}
 }

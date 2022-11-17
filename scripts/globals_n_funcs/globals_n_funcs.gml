@@ -90,6 +90,11 @@ function detectSlappable(queue)
 /*
 TO DO:
 	
+	BUGS
+		top card text briefly shows "-3" before card arrives
+		
+		turns aren't passing correctly between players... playingh a card somehow plays 2 cards.... very strange
+		
 
 	learn text/fonts for Gamemaker
 	
