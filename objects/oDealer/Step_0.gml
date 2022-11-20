@@ -32,19 +32,24 @@ if dealTimer <= 0 and cardsToDeal > 0
 		break;
 		
 		case "playing card":
-			var myCard = instance_create_layer(deckPositions[targetDeck][0], deckPositions[targetDeck][1], "Instances", oDealtCard);
+			// spawn card
+			var _x = deckPositions[targetDeck][0];
+			var _y = deckPositions[targetDeck][1];
+			var myCard = instance_create_layer(_x, _y, "Instances", oDealtCard);
 			
+			// feed it destination
 			myCard.finalX = oDeck.x;
 			myCard.finalY = oDeck.y;
 			
+			// feed it other stuff
 			myCard.easingFunc = easeOutQuint;
 			myCard.c = myCard.dealSpeed(.25);
 			myCard.sprite_index = sCard;
 			myCard.image_index = image;
-			myCard.targetScale = 2.3 // magic number
+			myCard.targetScale = 2.3; // magic number
 			myCard.isplayed = true; // being played to the deck ( as opposed to dealt or something else)
 			
-			// draw depth related
+			// draw depth decreased for each new card
 			cardDepth -= 1;
 			myCard.depth = cardDepth;
 			

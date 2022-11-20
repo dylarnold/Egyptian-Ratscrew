@@ -4,6 +4,7 @@
   "name": "Egyptian Ratscrew",
   "resources": [
     {"id":{"name":"sOut","path":"sprites/sOut/sOut.yy",},"order":7,},
+    {"id":{"name":"sCardBack","path":"sprites/sCardBack/sCardBack.yy",},"order":10,},
     {"id":{"name":"rMenu","path":"rooms/rMenu/rMenu.yy",},"order":1,},
     {"id":{"name":"sSlap1","path":"sprites/sSlap1/sSlap1.yy",},"order":9,},
     {"id":{"name":"sndCardThwick","path":"sounds/sndCardThwick/sndCardThwick.yy",},"order":0,},
@@ -12,7 +13,7 @@
     {"id":{"name":"globals_n_funcs","path":"scripts/globals_n_funcs/globals_n_funcs.yy",},"order":0,},
     {"id":{"name":"sndSlap1","path":"sounds/sndSlap1/sndSlap1.yy",},"order":3,},
     {"id":{"name":"oDealer","path":"objects/oDealer/oDealer.yy",},"order":1,},
-    {"id":{"name":"sCardBack","path":"sprites/sCardBack/sCardBack.yy",},"order":1,},
+    {"id":{"name":"sCardIndicator","path":"sprites/sCardIndicator/sCardIndicator.yy",},"order":1,},
     {"id":{"name":"sndBurnVoice1","path":"sounds/sndBurnVoice1/sndBurnVoice1.yy",},"order":1,},
     {"id":{"name":"oDeck","path":"objects/oDeck/oDeck.yy",},"order":0,},
     {"id":{"name":"fnt_Gabriola","path":"fonts/fnt_Gabriola/fnt_Gabriola.yy",},"order":0,},

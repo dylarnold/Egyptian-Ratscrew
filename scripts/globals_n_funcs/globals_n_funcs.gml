@@ -91,9 +91,8 @@ function detectSlappable(queue)
 TO DO:
 	
 	BUGS
-		top card text briefly shows "-3" before card arrives
 		
-		turns aren't passing correctly between players... playingh a card somehow plays 2 cards.... very strange
+		burning card when pile is empty sometimes doesn't show top card.... maybe related to how you can find slap windows that seem invalid?
 		
 
 	learn text/fonts for Gamemaker
@@ -104,15 +103,17 @@ TO DO:
 	
 	visual feedback
 		show why a slap was correct! 
-		show slap animation always
 		show fail slap animation
 		show burning card animation
+		
+		pharoah's face sprite whose facial expression grows more and more excited based on the size of the pile. also reacts to events.?
 		
 		
 	audio feedback
 		custom slap sounds for each player
 		successful slap sound
 		illegal slap sound
+		out of turn attempt at playing card sound
 		
 	
 	options menu
@@ -138,15 +139,13 @@ TO DO:
 	
 	
 Design:
-	do i enforce player turns, or simply penalize an out-of-turn play with burning a card?
-		probably player turns. Can make a stupid sound if a player tries to play out of turn.
+
+	Enforce player turns.
 	
 	Dedicated slap-in button for non-players: it will add a new player to the game and assign them buttons
-		Yes, but might be unfair if the other buttons end up being universal.
 		
-	
 	Each player has their own "play card" button, and their own "slap" button
-		Probably?
+	
 	OR
 	
 	Universal Play-Card button? 

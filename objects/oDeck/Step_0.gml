@@ -2,9 +2,30 @@
 // Get input from players while oDealer state is noone
 if oDealer.state == "wait"
 {
-	var ap = activePlayer	// ap used for playing cards (must be active player's turn)
-	var activePlayerDeckSize = ds_queue_size(deck[ap]);
+	// true if we need to skip section of code
+	var skip = false;
 	
+	// ap used for playing cards (must be active player's turn)
+	// turns wrap
+	if ap >= pCount
+	{
+		ap = 0;
+	}
+	var activePlayerDeckSize = ds_queue_size(deck[ap]);
+	// find next active player without an empty deck
+	var loopcheck = 0;
+	while (activePlayerDeckSize <= 0 and loopcheck < 1)
+	{
+		ap += 1;
+		if ap >= pCount
+		{
+			ap = 0;
+			loopcheck += 1;
+		}
+		activePlayerDeckSize = ds_queue_size(deck[ap]);
+	}
+	
+	// see if any player slapped (looping through all players, checking if their slap button was pressed
 	for (var i = 0; i < pCount; i++) // i used for slapping (can do at any time)
 	{
 		var slappingPlayerDeckSize = ds_queue_size(deck[i]);
@@ -42,6 +63,11 @@ if oDealer.state == "wait"
 				// play audio
 				var snd = audio_play_sound(sndSlapVoice1, 0, false);
 				audio_sound_pitch(snd, 0.85);
+				
+				// successful slap means that player is next
+				ap = i
+				// skip check for player playing card
+				skip = true;
 			}
 			else // not slappable
 			{
@@ -89,34 +115,29 @@ if oDealer.state == "wait"
 				}
 			}
 		}
-		// if player uses "play card" button
-		else if keyboard_check_pressed(oSettings.playerControls[ap][0])
+	}
+	// check if the active player pressed their play card button
+	if keyboard_check_pressed(oSettings.playerControls[ap][0]) and !skip
+	{
+		if activePlayerDeckSize > 0 
 		{
-			if activePlayerDeckSize > 0 
+			pileSize += 1;
+			with oDealer
 			{
-				pileSize += 1;
-				with oDealer
-				{
-					state = "playing card";
-					targetDeck = ap;
-					startX = deckPositions[ap][0];
-					startY = deckPositions[ap][1];
-					cardsToDeal = 1;
-					image = ds_queue_head(other.deck[ap]);
-				}
-
-				// put card into pile
-				var card = ds_queue_dequeue(deck[ap]);
-				ds_queue_enqueue(pile, card);
-				
-				// advance player turn to next player
-				activePlayer += 1;
-				if activePlayer >= pCount
-				{
-					activePlayer = 0;
-				}
+				state = "playing card";
+				targetDeck = other.ap;
+				startX = deckPositions[other.ap][0];
+				startY = deckPositions[other.ap][1];
+				cardsToDeal = 1;
+				image = ds_queue_head(other.deck[other.ap]);
 			}
 
+			// put card into pile
+			var card = ds_queue_dequeue(deck[ap]);
+			ds_queue_enqueue(pile, card);
+			
+			// advance player turn to next player
+			ap += 1;
 		}
 	}
 	// pause button pressed
@@ -124,6 +145,5 @@ if oDealer.state == "wait"
 	{
 		// Code for pausing
 	}	
-	
 }
 

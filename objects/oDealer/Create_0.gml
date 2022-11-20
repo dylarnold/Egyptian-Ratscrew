@@ -12,7 +12,7 @@ var vv = room_height
 
 for (var i = 0; i < pCount; i++)
 {
-	deckPositions[i] = [(((i + 1) * hh) - sWidth * 0.5), (vv - 100)]
+	deckPositions[i] = [(((i + 1) * hh) - sWidth * 0.5), (vv - 250)]
 }
 
 

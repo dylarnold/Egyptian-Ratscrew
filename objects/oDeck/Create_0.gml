@@ -10,8 +10,8 @@ topCard = noone;
 pileSize = 0;
 showing = false;
 
-// whose turn is it?
-activePlayer = 0
+// whose turn is it? (active player)
+ap = 0
 
 // Discard pile (starts empty)
 pile = ds_queue_create();

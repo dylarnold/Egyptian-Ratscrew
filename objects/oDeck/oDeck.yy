@@ -3,8 +3,8 @@
   "resourceVersion": "1.0",
   "name": "oDeck",
   "spriteId": {
-    "name": "sCardBack",
-    "path": "sprites/sCardBack/sCardBack.yy",
+    "name": "sCardIndicator",
+    "path": "sprites/sCardIndicator/sCardIndicator.yy",
   },
   "solid": false,
   "visible": true,
