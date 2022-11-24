@@ -7,10 +7,8 @@ if oDealer.state == "wait"
 	
 	// ap used for playing cards (must be active player's turn)
 	// turns wrap
-	if ap >= pCount
-	{
-		ap = 0;
-	}
+	ap = ap mod pCount;
+	
 	var activePlayerDeckSize = ds_queue_size(deck[ap]);
 	// find next active player without an empty deck
 	var loopcheck = 0;
@@ -34,20 +32,21 @@ if oDealer.state == "wait"
 		if keyboard_check_pressed(oSettings.playerControls[i][1])
 		{
 			// play sound and effect
-			var myslap = instance_create_layer((x + sprite_width / 2 * 2.3), (y + sprite_height / 2 * 2.3), "Instances", oSlapEffect);
+			var _x = x + sprite_width / 2 * 2.3;
+			var _y = y + sprite_height / 2 * 2.3;
+			instance_create_layer(_x, _y, "Instances", oSlapEffect);
 			audio_play_sound(sndSlap1, 1, false);
 			
 			// if pile is slappable
 			if detectSlappable(pile)
 			{
-				showing = false;
+				// feed oDealer info and set state
 				with oDealer
 				{
-					// animate cards
 					state = "scooping";
 					targetDeck = i;
-					finalX = deckPositions[i][0];
-					finalY = deckPositions[i][1];
+					//finalX = deckPositions[i][0];
+					//finalY = deckPositions[i][1];
 					cardsToDeal = other.pileSize;
 				}
 				
@@ -57,17 +56,20 @@ if oDealer.state == "wait"
 					var card = ds_queue_dequeue(pile);
 					ds_queue_enqueue(deck[i], card);
 				}
+				
+				// empty pile, clear owed cards
 				pileSize = 0;
 				topCard = noone;
+				showing = false;
+				cardsOwed = 0;
+				ap = i			// successful slap means that player is next
+				skip = true;	// skip check for player playing card
 				
 				// play audio
 				var snd = audio_play_sound(sndSlapVoice1, 0, false);
 				audio_sound_pitch(snd, 0.85);
 				
-				// successful slap means that player is next
-				ap = i
-				// skip check for player playing card
-				skip = true;
+				
 			}
 			else // not slappable
 			{
@@ -75,34 +77,36 @@ if oDealer.state == "wait"
 				{
 					// burn a card
 					pileSize += 1;
+					
 					with oDealer
 					{
 						// animate
 						state = "burning";
 						targetDeck = i;
-						startX = deckPositions[i][0];
-						startY = deckPositions[i][1];
+						//startX = deckPositions[i][0];
+						//startY = deckPositions[i][1];
 						cardsToDeal = global.burnAmmount;
 						image = ds_queue_head(other.deck[i]);
-
 					}
+					
 					// move burnt cards to bottom of pile (head of queue)
 					// GML queue datastructures don't support appending to left. 
 					// need to copy, empty, append, append copied values.
 					
-					// copy
-					var qTemp = ds_queue_create();
-					ds_queue_copy(qTemp, pile);
-					// empty
-					ds_queue_clear(pile);
-					// append
-					var qTempSize = ds_queue_size(qTemp);
+					
+					var qTemp = ds_queue_create();		 
+					ds_queue_copy(qTemp, pile);			 // copy pile
+					
+					ds_queue_clear(pile);				 // empty pile
+					
+					// add burned cards to pile
 					for (var j = 0; j < global.burnAmmount; j++)
 					{
 						var card = ds_queue_dequeue(deck[i]);
 						ds_queue_enqueue(pile, card);
 					}
 					// append copied values
+					var qTempSize = ds_queue_size(qTemp);
 					for (var j = 0; j < qTempSize; j++)
 					{
 						var card = ds_queue_dequeue(qTemp);
@@ -126,8 +130,8 @@ if oDealer.state == "wait"
 			{
 				state = "playing card";
 				targetDeck = other.ap;
-				startX = deckPositions[other.ap][0];
-				startY = deckPositions[other.ap][1];
+				//startX = deckPositions[other.ap][0];
+				//startY = deckPositions[other.ap][1];
 				cardsToDeal = 1;
 				image = ds_queue_head(other.deck[other.ap]);
 			}
@@ -136,14 +140,60 @@ if oDealer.state == "wait"
 			var card = ds_queue_dequeue(deck[ap]);
 			ds_queue_enqueue(pile, card);
 			
-			// advance player turn to next player
-			ap += 1;
+			// decrement owed cards
+			cardsOwed -= 1;
+			
+			
+			// if any of (J, Q, K, A) was just played, advance turn and set cards owed for next player.
+			var val = card mod 13;
+			if val == 0 or val == 10 or val == 11 or val == 12
+			{
+				// save endebted player
+				endebtedP = ap;
+				ap += 1;
+				
+				if val == 0 
+				{
+					cardsOwed = 4; // 4 for A.
+				}
+				else
+				{
+					cardsOwed = val - 9; // 1 for J, 2 for Q, 3 for K.
+				}
+			}
+			else if cardsOwed <= 0
+			{
+				
+				if endebtedP != noone // player of the card was endebted after reaching 0 cards owed?
+				{
+					// endebted player is scooping so they're the next active player.
+					ap = endebtedP;
+					endebtedP = noone;
+					// below code copied and pasted from above (make function?)
+				
+					with oDealer
+					{
+						// animate cards
+						pausing = true;
+						secondTargetDeck = other.ap;
+						//finalX = deckPositions[other.ap][0];
+						//finalY = deckPositions[other.ap][1];
+						cardsToDeal = other.pileSize;
+					}
+				}
+				else
+				{
+					// we weren't endebted, so turn simply advances.
+					ap += 1;
+				}	
+			}	
 		}
 	}
 	// pause button pressed
 	if keyboard_check_pressed(oSettings.pauseKey)
 	{
 		// Code for pausing
+		room_goto(rMenu);
 	}	
 }
 

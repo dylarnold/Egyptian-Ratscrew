@@ -15,10 +15,17 @@ for (var i = 0; i < pCount; i++)
 	deckPositions[i] = [(((i + 1) * hh) - sWidth * 0.5), (vv - 250)]
 }
 
+// Timer for pausing (not pause menu)
+waitTimerMax = .5 * room_speed;
+waitTimer = waitTimerMax;
+pausing = false;
+
 
 // Timer for dealing animation
 dealTimerMax = 0.25 * room_speed;
 dealTimer = dealTimerMax;
+
+
 cardsToDeal = global.deckSize;
 
 // Game states and associated variables

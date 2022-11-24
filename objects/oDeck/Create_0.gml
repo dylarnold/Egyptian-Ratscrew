@@ -10,6 +10,13 @@ topCard = noone;
 pileSize = 0;
 showing = false;
 
+// remembers who is owed cards
+endebtedP = noone;
+
+
+// A, J Q, K rules.
+cardsOwed = 0;
+
 // whose turn is it? (active player)
 ap = 0
 

@@ -90,9 +90,12 @@ function detectSlappable(queue)
 /*
 TO DO:
 	
+	make it so that when after a debt of cards has been fully paid and the pile is owed to a player, it can still be slapped.
+	this will require modifying the detectSlappable function and the logic of the oDeck step event probably... 
+	
 	BUGS
+		detectSlappable function doesn't support wrapping 4 in a row values.
 		
-		burning card when pile is empty sometimes doesn't show top card.... maybe related to how you can find slap windows that seem invalid?
 		
 
 	learn text/fonts for Gamemaker

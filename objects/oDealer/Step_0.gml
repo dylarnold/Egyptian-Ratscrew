@@ -71,6 +71,10 @@ if dealTimer <= 0 and cardsToDeal > 0
 			
 			// reset oDeck's showing value to false
 			oDeck.showing = false;
+			if secondTargetDeck != noone
+			{
+				targetDeck = secondTargetDeck;
+			}
 			
 			// animate from deck/pile position to particular deck
 			myCard.finalX = deckPositions[targetDeck][0];
@@ -83,7 +87,14 @@ if dealTimer <= 0 and cardsToDeal > 0
 			// depth related
 			cardDepth = depth - 53;
 			
-			if cardsToDeal <= 0 {state = "wait";}
+			if cardsToDeal <= 0 
+			{
+				state = "wait";
+				if secondTargetDeck != noone
+				{
+					secondTargetDeck = noone;
+				}
+			}
 			
 			
 		break;
@@ -103,9 +114,41 @@ if dealTimer <= 0 and cardsToDeal > 0
 			myCard.drawUnder = true;
 			state = "wait";
 		break;
+
+	}
+}
+
+if pausing
+{
+	if waitTimer >= 0
+	{
+		waitTimer -= 1;
+		audio_play_sound(sndCardThwick, 1, false);
+	}
+	else
+	{
+		waitTimer = waitTimerMax;
+		state = "scooping";
+		
+		pausing = false;
+		with oDeck
+		{
+			// move all cards from pile to scooping player's deck
+			for (var j = 0; j < pileSize; j++)
+			{
+				var card = ds_queue_dequeue(pile);
+				ds_queue_enqueue(deck[ap], card);
+			}
+			pileSize = 0;
+			topCard = noone;
+			showing = false;
+				
+			// play audio
+					
+			// ****** end of copied code
+		}
 	}
 }
 
 // timer ticks down
 dealTimer -= 1;
- 
