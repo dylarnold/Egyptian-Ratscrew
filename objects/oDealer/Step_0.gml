@@ -123,7 +123,6 @@ if pausing
 	if waitTimer >= 0
 	{
 		waitTimer -= 1;
-		audio_play_sound(sndCardThwick, 1, false);
 	}
 	else
 	{
@@ -139,6 +138,7 @@ if pausing
 				var card = ds_queue_dequeue(pile);
 				ds_queue_enqueue(deck[ap], card);
 			}
+			pileArray = []; // delete array used for testing
 			pileSize = 0;
 			topCard = noone;
 			showing = false;

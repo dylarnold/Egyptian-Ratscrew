@@ -16,7 +16,7 @@ for (var i = 0; i < pCount; i++)
 }
 
 // Timer for pausing (not pause menu)
-waitTimerMax = .5 * room_speed;
+waitTimerMax = 1.1 * room_speed;
 waitTimer = waitTimerMax;
 pausing = false;
 
@@ -30,6 +30,7 @@ cardsToDeal = global.deckSize;
 
 // Game states and associated variables
 targetDeck = 0;
+secondTargetDeck = noone;
 state = "dealing";
 image = noone;
 // dealing		// beginning of round when deck is divided amongs players

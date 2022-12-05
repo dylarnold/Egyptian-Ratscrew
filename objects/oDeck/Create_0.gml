@@ -14,7 +14,7 @@ showing = false;
 endebtedP = noone;
 
 
-// A, J Q, K rules.
+// A, J, Q, K rules.
 cardsOwed = 0;
 
 // whose turn is it? (active player)
@@ -22,6 +22,7 @@ ap = 0
 
 // Discard pile (starts empty)
 pile = ds_queue_create();
+pileArray = [];
 
 
 // Initial deck array (1 thru 52 ordered)

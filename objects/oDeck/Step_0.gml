@@ -48,7 +48,9 @@ if oDealer.state == "wait"
 					//finalX = deckPositions[i][0];
 					//finalY = deckPositions[i][1];
 					cardsToDeal = other.pileSize;
+					pausing = false;
 				}
+				
 				
 				// move all cards from pile to slapping player's deck
 				for (var j = 0; j < pileSize; j++)
@@ -56,6 +58,8 @@ if oDealer.state == "wait"
 					var card = ds_queue_dequeue(pile);
 					ds_queue_enqueue(deck[i], card);
 				}
+				// delete array used for testing
+				pileArray = [];
 				
 				// empty pile, clear owed cards
 				pileSize = 0;
@@ -66,7 +70,7 @@ if oDealer.state == "wait"
 				skip = true;	// skip check for player playing card
 				
 				// play audio
-				var snd = audio_play_sound(sndSlapVoice1, 0, false);
+				var snd = audio_play_sound(sndCork1, 0, false);
 				audio_sound_pitch(snd, 0.85);
 				
 				
@@ -114,7 +118,7 @@ if oDealer.state == "wait"
 					}
 					
 					// play audio
-					var snd = audio_play_sound(sndBurnVoice1, 0, false);
+					var snd = audio_play_sound(sndFailHorn1, 0, false);
 					audio_sound_pitch(snd, 0.85);
 				}
 			}
@@ -123,7 +127,7 @@ if oDealer.state == "wait"
 	// check if the active player pressed their play card button
 	if keyboard_check_pressed(oSettings.playerControls[ap][0]) and !skip
 	{
-		if activePlayerDeckSize > 0 
+		if activePlayerDeckSize > 0 and !oDealer.pausing
 		{
 			pileSize += 1;
 			with oDealer
@@ -140,14 +144,45 @@ if oDealer.state == "wait"
 			var card = ds_queue_dequeue(deck[ap]);
 			ds_queue_enqueue(pile, card);
 			
+			
+			
 			// decrement owed cards
 			cardsOwed -= 1;
 			
 			
 			// if any of (J, Q, K, A) was just played, advance turn and set cards owed for next player.
 			var val = card mod 13;
+			
+			// push to array used for testing
+			if val < 10
+			{
+				array_push(pileArray, val);
+			}
+			
 			if val == 0 or val == 10 or val == 11 or val == 12
 			{
+				// test array 
+				var txt = "";
+				switch (val)
+				{
+					case 0:
+						txt = "A"
+					break;
+					
+					case 10:
+						txt = "J";
+					break;
+					
+					case 11:
+						txt = "Q";
+					break;
+					
+					case 12:
+						txt = "K";
+					break;
+				}
+				array_push(pileArray, txt);
+				
 				// save endebted player
 				endebtedP = ap;
 				ap += 1;
@@ -164,13 +199,13 @@ if oDealer.state == "wait"
 			else if cardsOwed <= 0
 			{
 				
-				if endebtedP != noone // player of the card was endebted after reaching 0 cards owed?
+				if endebtedP != noone // player of the card WAS endebted after reaching 0 cards owed
 				{
 					// endebted player is scooping so they're the next active player.
 					ap = endebtedP;
 					endebtedP = noone;
+					
 					// below code copied and pasted from above (make function?)
-				
 					with oDealer
 					{
 						// animate cards
@@ -179,6 +214,9 @@ if oDealer.state == "wait"
 						//finalX = deckPositions[other.ap][0];
 						//finalY = deckPositions[other.ap][1];
 						cardsToDeal = other.pileSize;
+						
+						// play sound
+						audio_play_sound(sndBowShot1, 1, false);
 					}
 				}
 				else

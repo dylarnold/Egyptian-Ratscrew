@@ -4,6 +4,8 @@ global.deckSize = 52;
 global.cardBack = sCardBack;
 global.burnAmmount = 1;
 
+#macro MAX_STARTING_PLAYER_COUNT  5 // highest 
+
 // https://easings.net/ (transcribed from TypeScript)
 // bounds for x: 0 through 1
 function easeOutElastic(x) 
@@ -75,7 +77,26 @@ function detectSlappable(queue)
 				// descending from top of pile
 				if  array[qSize - 4] == array[qSize - 3] - 1
 				and array[qSize - 3] == array[qSize - 2] - 1
-				and array[qSize - 2] == array[qSize = 1] - 1 
+				and array[qSize - 2] == array[qSize - 1] - 1 
+				{
+					return true;
+				}
+				
+				// detect if there's a "wrapping" 4 in a row
+				if     (array[qSize - 4] == 12
+					and array[qSize - 3] == 0
+					and array[qSize - 2] == 1
+					and array[qSize - 1] == 2)
+				or
+				       (array[qSize - 4] == 11
+					and array[qSize - 3] == 12
+					and array[qSize - 2] == 0
+					and array[qSize - 1] == 1)
+				or
+					   (array[qSize - 4] == 10
+					and array[qSize - 3] == 11
+					and array[qSize - 2] == 12
+					and array[qSize - 1] == 0)
 				{
 					return true;
 				}
@@ -89,20 +110,18 @@ function detectSlappable(queue)
 
 /*
 TO DO:
+
+BUG
+	after a combo of slapping and owing cards, the next card played sometimes gets snagged as if the amount of owed cards wasn't reset.
 	
-	make it so that when after a debt of cards has been fully paid and the pile is owed to a player, it can still be slapped.
-	this will require modifying the detectSlappable function and the logic of the oDeck step event probably... 
+	_______
 	
-	BUGS
-		detectSlappable function doesn't support wrapping 4 in a row values.
-		
-		
+	change detect_slappable to return the slapped cards. maybe as an array?
+	
+	remember to adjust code calling detect_slappable accordingly.
+			
 
 	learn text/fonts for Gamemaker
-	
-	J, Q, K, A rules
-		make a state where next player owes x cards. it remains their turn until x cards have been played (overruled by slap)
-			handled by oDeck since that's already what is detecting player input.... add more conditions to if statements
 	
 	visual feedback
 		show why a slap was correct! 
@@ -149,14 +168,6 @@ Design:
 		
 	Each player has their own "play card" button, and their own "slap" button
 	
-	OR
-	
-	Universal Play-Card button? 
-		If player turns are enforced, it could work. 
-		Sounds kind-of more fun?
-		What if a player accidentally plays a card for someone else?
-		
-	
-		
+
 		
 */

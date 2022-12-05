@@ -1,5 +1,10 @@
 /// @description 
+// display whose turn it is
+draw_text(50, 50, "player " + string(ap + 1) + "'s turn");
 
+
+// display deck contents
+draw_text(100, 100, "discard: " + string(pileArray));
 
 // draw top card 
 if showing
@@ -9,6 +14,7 @@ if showing
 
 
 draw_set_color(c_navy);
+
 // show how many cards are in pile
 draw_text(x, y - 80, "Cards in pile: " + string(pileSize));
 
