@@ -118,8 +118,8 @@ if oDealer.state == "wait"
 					}
 					
 					// play audio
-					var snd = audio_play_sound(sndFailHorn1, 0, false);
-					audio_sound_pitch(snd, 0.85);
+					var snd = audio_play_sound(sndFailHorn1, 0, false, .2);
+					
 				}
 			}
 		}
@@ -234,4 +234,26 @@ if oDealer.state == "wait"
 		room_goto(rMenu);
 	}	
 }
+
+// see if a player has won the game
+var emptyDeckCount = 0;
+var winner = noone;
+for (var i = 0; i < pCount; i++)
+{
+	if array_length(deck[i]) == 0
+	{
+		emptyDeckCount += 1;
+	}
+	else
+	{
+		winner = i;
+	}
+	
+}
+if emptyDeckCount >= pCount - 1
+{
+	var myVictoryObject = instance_create_layer(500, 500, "Instances", oVictory)
+	myVictoryObject.winningPlayer = winner
+}
+
 
