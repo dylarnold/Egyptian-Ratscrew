@@ -112,7 +112,9 @@ function detectSlappable(queue)
 TO DO:
 
 BUG
-	after a combo of slapping and owing cards, the next card played sometimes gets snagged as if the amount of owed cards wasn't reset.
+	adjusting the global burn amount doesn't work. cards disappear.
+	
+	burning a card while deck is empty, doesn't trigger oDeck to show topCard SOMETIMES
 	
 	_______
 	

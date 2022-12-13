@@ -66,7 +66,8 @@ if oDealer.state == "wait"
 				topCard = noone;
 				showing = false;
 				cardsOwed = 0;
-				ap = i			// successful slap means that player is next
+				endebtedP = noone;
+				ap = i;			// successful slap means that player is next
 				skip = true;	// skip check for player playing card
 				
 				// play audio
@@ -82,6 +83,8 @@ if oDealer.state == "wait"
 					// burn a card
 					pileSize += 1;
 					
+					// skip makes it impossible to slap and then play card in same turn
+					skip = true;
 					with oDealer
 					{
 						// animate
@@ -127,7 +130,7 @@ if oDealer.state == "wait"
 	// check if the active player pressed their play card button
 	if keyboard_check_pressed(oSettings.playerControls[ap][0]) and !skip
 	{
-		if activePlayerDeckSize > 0 and !oDealer.pausing
+		if activePlayerDeckSize > 0 and !oDealer.pausing and oDealer.state != "scooping"
 		{
 			pileSize += 1;
 			with oDealer
@@ -141,17 +144,19 @@ if oDealer.state == "wait"
 			}
 
 			// put card into pile
+			
 			var card = ds_queue_dequeue(deck[ap]);
 			ds_queue_enqueue(pile, card);
-			
-			
 			
 			// decrement owed cards
 			cardsOwed -= 1;
 			
 			
 			// if any of (J, Q, K, A) was just played, advance turn and set cards owed for next player.
-			var val = card mod 13;
+			if card != undefined
+			{
+				var val = card mod 13;
+			}
 			
 			// push to array used for testing
 			if val < 10
@@ -166,7 +171,7 @@ if oDealer.state == "wait"
 				switch (val)
 				{
 					case 0:
-						txt = "A"
+						txt = "A";
 					break;
 					
 					case 10:

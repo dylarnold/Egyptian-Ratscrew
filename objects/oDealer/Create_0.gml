@@ -22,7 +22,7 @@ pausing = false;
 
 
 // Timer for dealing animation
-dealTimerMax = 0.25 * room_speed;
+dealTimerMax = 0.15 * room_speed;
 dealTimer = dealTimerMax;
 
 

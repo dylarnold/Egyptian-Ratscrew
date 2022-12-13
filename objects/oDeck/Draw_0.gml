@@ -3,8 +3,19 @@
 draw_text(50, 50, "player " + string(ap + 1) + "'s turn");
 
 
-// display deck contents
-draw_text(100, 100, "discard: " + string(pileArray));
+// display discard contents
+var _one_indexed_pileArray = [];
+for (var i = 0; i < array_length(pileArray); i++)
+{
+	 if pileArray[i] != "A" 
+	and pileArray[i] != "J" 
+	and pileArray[i] != "Q" 
+	and pileArray[i] != "K"
+	{
+		array_push(_one_indexed_pileArray, pileArray[i] + 1);
+	}
+}
+draw_text(100, 100, "discard: " + string(_one_indexed_pileArray));
 
 // draw top card 
 if showing
