@@ -41,49 +41,46 @@ function detectSlappable(queue)
 		}
 		array[i] = cardVal;
 	}
+	// returned array
+	var returnArray = ["Nothing!"];
 	
 	if qSize >= 2 
 	{	
 		// double (two cards of the same cardVal, consecutive, on top
-		if array[qSize - 1] == array[qSize - 2] return true;
+		if array[qSize - 1] == array[qSize - 2] returnArray = ["Pair", array[qSize - 1], array[qSize - 2]];
 		
 		// tens (top two cards sum to 10)
-		if (array[qSize - 1] + 1) + (array[qSize - 2] + 1) == 10 return true;
+		if (array[qSize - 1] + 1) + (array[qSize - 2] + 1) == 10 returnArray = ["Ten", array[qSize - 1], array[qSize - 2]];
 		
 		// marriage (K, Q or Q, K on top)
-		if array[qSize - 1] + array[qSize - 2] == 11 + 12 return true;
+		if array[qSize - 1] + array[qSize - 2] == 11 + 12 returnArray = ["Marriage", array[qSize - 1], array[qSize - 2]];
 		
 		if qSize >= 3
 		{
 			// sandwich tens (two cards separated by another sum to ten)
-			if (array[qSize - 1] + 1) + (array[qSize - 3] + 1) == 10 return true;
+			if (array[qSize - 1] + 1) + (array[qSize - 3] + 1) == 10 returnArray = ["Sandwich Ten", array[qSize - 1], array[qSize -3]];
 		
 			// sandwich (double separated by a card)
-			if array[qSize - 1] == array[qSize - 3] return true;
+			if array[qSize - 1] == array[qSize - 3] returnArray = ["Sandwich", array[qSize - 1], array[qSize - 3]];
 		
 			// top bottom (big sandwich) (same card on bottom as on top)
-			if array[qSize - 1] == array[0] return true;
+			if array[qSize - 1] == array[0] returnArray = ["Big Sandwich", array[qSize - 1], array[0]];
 	
 			// four in a row (ex. K, A, 2, 3 or 10, J, Q, K)
 			if qSize >= 4
 			{
 				// ascending from top of pile
-				if  array[qSize - 4] == array[qSize - 3] + 1 
-				and array[qSize - 3] == array[qSize - 2] + 1 
-				and array[qSize - 2] == array[qSize - 1] + 1
-				{
-					return true;
-				}
-				// descending from top of pile
-				if  array[qSize - 4] == array[qSize - 3] - 1
-				and array[qSize - 3] == array[qSize - 2] - 1
-				and array[qSize - 2] == array[qSize - 1] - 1 
-				{
-					return true;
-				}
-				
-				// detect if there's a "wrapping" 4 in a row
-				if     (array[qSize - 4] == 12
+				if  (array[qSize - 4] == array[qSize - 3] + 1 
+				 and array[qSize - 3] == array[qSize - 2] + 1 
+				 and array[qSize - 2] == array[qSize - 1] + 1)
+					or
+					// descending from top of pile
+					(array[qSize - 4] == array[qSize - 3] - 1
+				 and array[qSize - 3] == array[qSize - 2] - 1
+				 and array[qSize - 2] == array[qSize - 1] - 1)
+					or
+					// wrapping 
+					((array[qSize - 4] == 12
 					and array[qSize - 3] == 0
 					and array[qSize - 2] == 1
 					and array[qSize - 1] == 2)
@@ -96,16 +93,21 @@ function detectSlappable(queue)
 					   (array[qSize - 4] == 10
 					and array[qSize - 3] == 11
 					and array[qSize - 2] == 12
-					and array[qSize - 1] == 0)
+					and array[qSize - 1] == 0))
 				{
-					return true;
+					returnArray = ["Four In A Row", array[qSize - 1], array[qSize - 2], array[qSize - 3], array[qSize - 4]];
 				}
 			}
 		}
 	}
+	
 	// avoid memory leak
 	ds_queue_destroy(qCopy);
-	return false;
+	for (var i = 1; i < array_length(returnArray); i++)
+	{
+		returnArray[i] = returnArray[i] + 1;
+	}
+	return returnArray;
 }
 
 /*
@@ -118,15 +120,17 @@ BUG
 	
 	_______
 	
-	change detect_slappable to return the slapped cards. maybe as an array?
+	*done change detect_slappable to return the slapped cards. maybe as an array? DONE
 	
-	remember to adjust code calling detect_slappable accordingly.
+	*done remember to adjust code calling detect_slappable accordingly. DONE
+	
+	display spites of cards in the slapped cards array when cards are slapped
 			
 
 	learn text/fonts for Gamemaker
 	
 	visual feedback
-		show why a slap was correct! 
+		*done show why a slap was correct! 
 		show fail slap animation
 		show burning card animation
 		
@@ -135,8 +139,8 @@ BUG
 		
 	audio feedback
 		custom slap sounds for each player
-		successful slap sound
-		illegal slap sound
+		*done successful slap sound
+		*done illegal slap sound
 		out of turn attempt at playing card sound
 		
 	

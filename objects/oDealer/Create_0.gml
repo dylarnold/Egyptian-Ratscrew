@@ -33,6 +33,8 @@ targetDeck = 0;
 secondTargetDeck = noone;
 state = "dealing";
 image = noone;
+
+reasonForScoop = "";
 // dealing		// beginning of round when deck is divided amongs players
 // scooping		// after a slap when a player collects the pile 
 // burning 		// after an illegal slap when a player must pay cards to the pile

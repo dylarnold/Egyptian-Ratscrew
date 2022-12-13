@@ -38,7 +38,8 @@ if oDealer.state == "wait"
 			audio_play_sound(sndSlap1, 1, false);
 			
 			// if pile is slappable
-			if detectSlappable(pile)
+			latestSlappedCards = detectSlappable(pile);
+			if latestSlappedCards[0] != "Nothing!"
 			{
 				// feed oDealer info and set state
 				with oDealer
@@ -49,6 +50,7 @@ if oDealer.state == "wait"
 					//finalY = deckPositions[i][1];
 					cardsToDeal = other.pileSize;
 					pausing = false;
+					reasonForScoop = "Slapped!";
 				}
 				
 				
@@ -219,6 +221,7 @@ if oDealer.state == "wait"
 						//finalX = deckPositions[other.ap][0];
 						//finalY = deckPositions[other.ap][1];
 						cardsToDeal = other.pileSize;
+						reasonForScoop = "Scooped!";
 						
 						// play sound
 						audio_play_sound(sndBowShot1, 1, false);

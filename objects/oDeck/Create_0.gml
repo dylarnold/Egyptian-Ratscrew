@@ -9,7 +9,7 @@ deckSize = global.deckSize;
 topCard = noone;
 pileSize = 0;
 showing = false;
-
+latestSlappedCards = "";
 // remembers who is owed cards
 endebtedP = noone;
 
