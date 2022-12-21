@@ -24,6 +24,16 @@ pausing = false;
 // Timer for dealing animation
 dealTimerMax = 0.15 * room_speed;
 dealTimer = dealTimerMax;
+playerScooping = noone;
+reasonForScoop = "";
+flip = false; // bool used to only set playerScooping to targetDeck once in draw event ( not every frame);
+
+
+
+// Timer for dealing with displaying the reason for a scoop/slap
+
+displayReasonTimerMax = room_speed * 2;
+displayReasonTimer = 0;
 
 
 cardsToDeal = global.deckSize;
@@ -34,7 +44,7 @@ secondTargetDeck = noone;
 state = "dealing";
 image = noone;
 
-reasonForScoop = "";
+
 // dealing		// beginning of round when deck is divided amongs players
 // scooping		// after a slap when a player collects the pile 
 // burning 		// after an illegal slap when a player must pay cards to the pile

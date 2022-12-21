@@ -114,6 +114,9 @@ function detectSlappable(queue)
 TO DO:
 
 BUG
+
+	scoopingPlayer (showing who is scooping/slapping text) for some reason, is one player higher than it should be......
+	 
 	adjusting the global burn amount doesn't work. cards disappear.
 	
 	burning a card while deck is empty, doesn't trigger oDeck to show topCard SOMETIMES

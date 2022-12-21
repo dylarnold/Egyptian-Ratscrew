@@ -51,6 +51,7 @@ if oDealer.state == "wait"
 					cardsToDeal = other.pileSize;
 					pausing = false;
 					reasonForScoop = "Slapped!";
+					flip = false;
 				}
 				
 				
@@ -222,6 +223,7 @@ if oDealer.state == "wait"
 						//finalY = deckPositions[other.ap][1];
 						cardsToDeal = other.pileSize;
 						reasonForScoop = "Scooped!";
+						flip = false;
 						
 						// play sound
 						audio_play_sound(sndBowShot1, 1, false);

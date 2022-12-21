@@ -29,9 +29,21 @@ for (var i = 0; i < pCount; i++)
 
 if state == "scooping"
 {
+	displayReasonTimer = displayReasonTimerMax;
+	
+	if !flip
+	{
+		playerScooping = targetDeck;
+		flip = true;
+	}
+}
+
+if displayReasonTimer >= 0 and flip
+{
 	draw_set_color(c_navy);
 	draw_set_halign(fa_center);
-	draw_text(deckPositions[targetDeck][0] + 35, deckPositions[targetDeck][1] - 220, reasonForScoop + "\n by player: " + string(targetDeck + 1));
+	draw_text(deckPositions[playerScooping][0] + 35, deckPositions[playerScooping][1] - 220, reasonForScoop + "\n by player: " + string(playerScooping + 1));
 	draw_set_halign(fa_left);
 	draw_set_color(c_white);
+	displayReasonTimer -= 1;
 }

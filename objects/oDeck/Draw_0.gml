@@ -50,5 +50,5 @@ if pileSize > 0
 
 // display latest slapped cards
 
-draw_text(room_width * 0.5, 50, string(latestSlappedCards));
+draw_text(room_width * 0.3, 50, "Most Recent Slap: " + string(latestSlappedCards));
 draw_set_color(c_white);

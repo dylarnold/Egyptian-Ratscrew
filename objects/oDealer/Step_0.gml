@@ -59,7 +59,7 @@ if dealTimer <= 0 and cardsToDeal > 0
 		
 		case "scooping":
 			// reset timer
-			dealTimer = dealTimerMax / (cardsToDeal / 3);
+			dealTimer = dealTimerMax / (cardsToDeal / 2 );
 	
 			//decrement remaining cards
 			cardsToDeal -= 1;
@@ -94,9 +94,7 @@ if dealTimer <= 0 and cardsToDeal > 0
 				{
 					secondTargetDeck = noone;
 				}
-			}
-			
-			
+			}		
 		break;
 
 		case "burning":
