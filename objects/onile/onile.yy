@@ -1,4 +1,7 @@
 {
+  "resourceType": "GMObject",
+  "resourceVersion": "1.0",
+  "name": "oNile",
   "spriteId": {
     "name": "sNile",
     "path": "sprites/sNile/sNile.yy",
@@ -25,11 +28,7 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "misc",
-    "path": "folders/Objects/misc.yy",
+    "name": "UI",
+    "path": "folders/Objects/misc/UI.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "oNile",
-  "tags": [],
-  "resourceType": "GMObject",
 }

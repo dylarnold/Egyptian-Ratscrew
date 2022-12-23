@@ -33,17 +33,24 @@ if state == "scooping"
 	
 	if !flip
 	{
-		playerScooping = targetDeck;
+
 		flip = true;
 	}
 }
 
-if displayReasonTimer >= 0 and flip
+// display who got the scoop/slap near their deck
+if displayReasonTimer >= 0 and flip and playerWhoGetsTheScoop != noone
 {
 	draw_set_color(c_navy);
 	draw_set_halign(fa_center);
-	draw_text(deckPositions[playerScooping][0] + 35, deckPositions[playerScooping][1] - 220, reasonForScoop + "\n by player: " + string(playerScooping + 1));
+	var _x = deckPositions[playerWhoGetsTheScoop][0] + 35;
+	var _y = deckPositions[playerWhoGetsTheScoop][1] - 220;
+	draw_text(_x, _y, reasonForScoop + "\n by player: " + string(playerWhoGetsTheScoop + 1));
 	draw_set_halign(fa_left);
 	draw_set_color(c_white);
 	displayReasonTimer -= 1;
+}
+else
+{
+	flip = false;
 }

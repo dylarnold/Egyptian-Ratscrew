@@ -15,7 +15,7 @@ for (var i = 0; i < array_length(pileArray); i++)
 		array_push(_one_indexed_pileArray, pileArray[i] + 1);
 	}
 }
-draw_text(100, 100, "discard: " + string(_one_indexed_pileArray));
+// draw_text(100, 100, "discard: " + string(_one_indexed_pileArray));
 
 // draw top card 
 if showing

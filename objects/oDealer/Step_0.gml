@@ -3,7 +3,7 @@ if dealTimer <= 0 and cardsToDeal > 0
 {
 	switch (state)
 	{
-		case "dealing":
+		case "dealing": // initial deal of all cards to all players at the start of game
 			// reset timer
 			dealTimer = dealTimerMax / (cardsToDeal / 3);
 	

@@ -24,11 +24,9 @@ pausing = false;
 // Timer for dealing animation
 dealTimerMax = 0.15 * room_speed;
 dealTimer = dealTimerMax;
-playerScooping = noone;
 reasonForScoop = "";
-flip = false; // bool used to only set playerScooping to targetDeck once in draw event ( not every frame);
-
-
+flip = false; // bool used to only set playerWhoGetsTheScoop to once in draw event ( not every frame);
+playerWhoGetsTheScoop = noone;
 
 // Timer for dealing with displaying the reason for a scoop/slap
 

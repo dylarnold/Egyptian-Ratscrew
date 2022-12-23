@@ -47,24 +47,42 @@ function detectSlappable(queue)
 	if qSize >= 2 
 	{	
 		// double (two cards of the same cardVal, consecutive, on top
-		if array[qSize - 1] == array[qSize - 2] returnArray = ["Pair", array[qSize - 1], array[qSize - 2]];
+		if array[qSize - 1] == array[qSize - 2]
+		{
+			returnArray = ["Pair", array[qSize - 1], array[qSize - 2]];
+		}
 		
 		// tens (top two cards sum to 10)
-		if (array[qSize - 1] + 1) + (array[qSize - 2] + 1) == 10 returnArray = ["Ten", array[qSize - 1], array[qSize - 2]];
+		if (array[qSize - 1] + 1) + (array[qSize - 2] + 1) == 10 
+		{
+			returnArray = ["Ten", array[qSize - 1], array[qSize - 2]];
+		}
 		
 		// marriage (K, Q or Q, K on top)
-		if array[qSize - 1] + array[qSize - 2] == 11 + 12 returnArray = ["Marriage", array[qSize - 1], array[qSize - 2]];
+		if array[qSize - 1] + array[qSize - 2] == 11 + 12 
+		{
+			returnArray = ["Marriage", array[qSize - 1], array[qSize - 2]];
+		}
 		
 		if qSize >= 3
 		{
 			// sandwich tens (two cards separated by another sum to ten)
-			if (array[qSize - 1] + 1) + (array[qSize - 3] + 1) == 10 returnArray = ["Sandwich Ten", array[qSize - 1], array[qSize -3]];
+			if (array[qSize - 1] + 1) + (array[qSize - 3] + 1) == 10 
+			{
+				returnArray = ["Sandwich Ten", array[qSize - 1], array[qSize -3]];
+			}
 		
 			// sandwich (double separated by a card)
-			if array[qSize - 1] == array[qSize - 3] returnArray = ["Sandwich", array[qSize - 1], array[qSize - 3]];
+			if array[qSize - 1] == array[qSize - 3] 
+			{
+				returnArray = ["Sandwich", array[qSize - 1], array[qSize - 3]];
+			}
 		
 			// top bottom (big sandwich) (same card on bottom as on top)
-			if array[qSize - 1] == array[0] returnArray = ["Big Sandwich", array[qSize - 1], array[0]];
+			if array[qSize - 1] == array[0] 
+			{
+				returnArray = ["Big Sandwich", array[qSize - 1], array[0]];
+			}
 	
 			// four in a row (ex. K, A, 2, 3 or 10, J, Q, K)
 			if qSize >= 4
@@ -106,6 +124,26 @@ function detectSlappable(queue)
 	for (var i = 1; i < array_length(returnArray); i++)
 	{
 		returnArray[i] = returnArray[i] + 1;
+		var _out = returnArray[i];
+		switch (returnArray[i])
+		{
+			case 1:
+				_out = "A"
+			break;
+			
+			case 11:
+				_out = "J";
+			break;
+				
+			case 12:
+				_out = "Q";
+			break;
+			
+			case 13:
+				_out = "K";
+			break;
+		}
+		returnArray[i] = _out;
 	}
 	return returnArray;
 }
@@ -115,8 +153,6 @@ TO DO:
 
 BUG
 
-	scoopingPlayer (showing who is scooping/slapping text) for some reason, is one player higher than it should be......
-	 
 	adjusting the global burn amount doesn't work. cards disappear.
 	
 	burning a card while deck is empty, doesn't trigger oDeck to show topCard SOMETIMES
@@ -127,45 +163,25 @@ BUG
 	
 	*done remember to adjust code calling detect_slappable accordingly. DONE
 	
-	display spites of cards in the slapped cards array when cards are slapped
 			
-
-	learn text/fonts for Gamemaker
 	
 	visual feedback
 		*done show why a slap was correct! 
 		show fail slap animation
 		show burning card animation
 		
-		pharoah's face sprite whose facial expression grows more and more excited based on the size of the pile. also reacts to events.?
-		
 		
 	audio feedback
-		custom slap sounds for each player
 		*done successful slap sound
 		*done illegal slap sound
 		out of turn attempt at playing card sound
 		
-	
-	options menu
-		ability to raise and lower volume
-		ability to fullscreen/windowed mode
-		ability to customize controls for player 1, 2, etc.
-		
-		player profiles?? handled at start of game like smash bros?
 	
 	win state
 		play again button
 	
 	
 	dedicated slap-in button (have it set up new controls and communicate them to new player)
-	
-	gamepad support?
-	mouse support?
-	
-	music?
-		gotta have a few boppin' tunes to play on loop
-			SNES inspired. maybe "egyptian" sounding musical mode/scale... but not too cliche.
 	
 	
 	
@@ -177,6 +193,4 @@ Design:
 		
 	Each player has their own "play card" button, and their own "slap" button
 	
-
-		
 */

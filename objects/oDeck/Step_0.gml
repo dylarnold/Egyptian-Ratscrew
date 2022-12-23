@@ -52,6 +52,7 @@ if oDealer.state == "wait"
 					pausing = false;
 					reasonForScoop = "Slapped!";
 					flip = false;
+					playerWhoGetsTheScoop = i;
 				}
 				
 				
@@ -102,7 +103,6 @@ if oDealer.state == "wait"
 					// move burnt cards to bottom of pile (head of queue)
 					// GML queue datastructures don't support appending to left. 
 					// need to copy, empty, append, append copied values.
-					
 					
 					var qTemp = ds_queue_create();		 
 					ds_queue_copy(qTemp, pile);			 // copy pile
@@ -224,6 +224,7 @@ if oDealer.state == "wait"
 						cardsToDeal = other.pileSize;
 						reasonForScoop = "Scooped!";
 						flip = false;
+						playerWhoGetsTheScoop = other.ap
 						
 						// play sound
 						audio_play_sound(sndBowShot1, 1, false);
