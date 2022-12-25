@@ -27,7 +27,7 @@ if showing
 draw_set_color(c_navy);
 
 // show how many cards are in pile
-draw_text(x, y - 80, "Cards in pile: " + string(pileSize));
+draw_text(x, y - 80, "Cards in pile:  " + string(pileSize));
 
 // text showing the top card of the deck (temporary testing only)
 if pileSize > 0

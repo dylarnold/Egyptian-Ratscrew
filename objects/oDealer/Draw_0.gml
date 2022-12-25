@@ -18,7 +18,7 @@ for (var i = 0; i < pCount; i++)
 		}
 		draw_set_font(fnt_Gabriola);
 		draw_set_color(c_navy);
-		draw_text(xx - 60 , yy - 80, "Cards in Deck: " + string(dSize));
+		draw_text(xx - 60 , yy - 80, "Player " + string(i + 1) + "'s Cards: " + string(dSize));
 		draw_set_color(c_white);
 	}
 	else

@@ -193,4 +193,9 @@ Design:
 		
 	Each player has their own "play card" button, and their own "slap" button
 	
+	
+	random notes
+	eventually: make it so cards only count as being on the pile when physically on the pile (not instantly like it is now).
+	better gui that shows "active" face-card and cards owed.
+	
 */
