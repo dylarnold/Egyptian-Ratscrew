@@ -8,15 +8,6 @@ global.burnAmmount = 1;
 
 // https://easings.net/ (transcribed from TypeScript)
 // bounds for x: 0 through 1
-function easeOutElastic(x) 
-{
-	var c4 = (2 * pi) / 3;
-
-	if x == 0 return 0;
-	if x == 1 return 1;
-
-	return power(2, (-10 * x)) * sin((x * 10 - 0.75) * c4) + 1;
-}
 
 function easeOutQuint(x)
 {
@@ -149,9 +140,10 @@ function detectSlappable(queue)
 }
 
 /*
-TO DO:
 
-BUG
+FUTURE TO DO:
+
+	bugs:
 
 	adjusting the global burn amount doesn't work. cards disappear.
 	
@@ -159,31 +151,21 @@ BUG
 	
 	_______
 	
-	*done change detect_slappable to return the slapped cards. maybe as an array? DONE
+	Have cards only count as being on the pile when physically on the pile (not instantly like it is now.
+	(must rewrite parts)
 	
-	*done remember to adjust code calling detect_slappable accordingly. DONE
+	better gui that shows "active" face-card and cards owed.
 	
 			
-	
+
 	visual feedback
-		*done show why a slap was correct! 
 		show fail slap animation
 		show burning card animation
 		
 		
 	audio feedback
-		*done successful slap sound
-		*done illegal slap sound
 		out of turn attempt at playing card sound
 		
-	
-	win state
-		play again button
-	
-	
-	dedicated slap-in button (have it set up new controls and communicate them to new player)
-	
-	
 	
 Design:
 
@@ -192,10 +174,5 @@ Design:
 	Dedicated slap-in button for non-players: it will add a new player to the game and assign them buttons
 		
 	Each player has their own "play card" button, and their own "slap" button
-	
-	
-	random notes
-	eventually: make it so cards only count as being on the pile when physically on the pile (not instantly like it is now).
-	better gui that shows "active" face-card and cards owed.
 	
 */
